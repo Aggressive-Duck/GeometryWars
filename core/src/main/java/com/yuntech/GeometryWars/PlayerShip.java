@@ -36,6 +36,7 @@ public class PlayerShip extends Entity {
             return;
         }
 
+        // 瞄準和射擊邏輯
         Vector2 aim = InputHandler.getAimDirection();
         if (aim.len2() > 0 && cooldownRemaining <= 0) {
             cooldownRemaining = cooldownFrames;
@@ -50,16 +51,22 @@ public class PlayerShip extends Entity {
 
             offset.set(35, 8).rotateRad(aimAngle);
             EntityManager.add(new Bullet(position.cpy().add(offset), vel));
-
         }
 
         if (cooldownRemaining > 0) cooldownRemaining--;
 
+        // 移動邏輯
         velocity.set(InputHandler.getMovementDirection()).scl(speed);
         position.add(velocity);
-        position.clamp(GameRoot.ScreenWidth, GameRoot.ScreenHeight);
 
-        if (velocity.len2() > 0) orientation = velocity.angleRad();
+        // 限制玩家在螢幕邊界內
+        position.x = MathUtils.clamp(position.x, 0, GameRoot.ScreenWidth);
+        position.y = MathUtils.clamp(position.y, 0, GameRoot.ScreenHeight);
+
+        // 根據移動方向更新朝向
+        if (velocity.len2() > 0) {
+            orientation = velocity.angleRad();
+        }
     }
 
     @Override
