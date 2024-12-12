@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
+//bbggggbgbgg
+//dasdadsasddsad
 public class GameRoot extends Game {
     public static GameRoot Instance;
     public static Viewport Viewport;
