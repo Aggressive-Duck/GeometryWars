@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen implements Screen {
-    private GameRoot game;
+    final GameRoot game;
     private SpriteBatch spriteBatch;
 
     public GameScreen(GameRoot game) {
@@ -36,17 +36,26 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        logic();
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Update game logic
-        EntityManager.update(delta);
+
 
         // Draw entities
         spriteBatch.begin();
         EntityManager.draw(spriteBatch);
         spriteBatch.draw(Art.pointer, Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
         spriteBatch.end();
+    }
+
+    private void logic() {
+
+        float delta = Gdx.graphics.getDeltaTime();
+        EntityManager.update(delta);
+
     }
 
     @Override

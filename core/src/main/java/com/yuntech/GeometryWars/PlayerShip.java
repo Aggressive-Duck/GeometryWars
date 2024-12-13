@@ -31,6 +31,7 @@ public class PlayerShip extends Entity {
 
     @Override
     public void update(float delta) {
+
         if (isDead()) {
             framesUntilRespawn--;
             return;
