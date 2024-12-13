@@ -1,4 +1,6 @@
 Art/Bullet.png
+Art/Cursor.png
+Art/HDcursor.png
 Art/Player.png
 Art/Pointer.png
 Art/Seeker.png

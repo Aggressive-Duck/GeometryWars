@@ -21,7 +21,7 @@ public class Art {
     }
 
     public static void dispose() {
-        pointer.dispose();
+//        pointer.dispose();
     }
 }
 

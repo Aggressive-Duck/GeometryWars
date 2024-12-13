@@ -1,5 +1,6 @@
 package com.yuntech.GeometryWars;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,15 +16,20 @@ public class PlayerShip extends Entity {
     private static final int cooldownFrames = 6;
     private int cooldownRemaining = 0;
     private int framesUntilRespawn = 0;
-    private static final float speed = 8;
+    private static final float speed = 4f;
     private static final float bulletSpeed = 11f;
+
 
     private PlayerShip() {
         this.image = Art.player;
-        this.position = new Vector2(GameRoot.ScreenWidth / 2, GameRoot.ScreenHeight / 2);
+//        this.position = new Vector2(GameRoot.Viewport.getWorldWidth() / 2, GameRoot.Viewport.getWorldHeight() / 2);
         this.velocity = new Vector2(); // Initialize velocity
         this.radius = 10;
+        this.sprite = new Sprite(image);
+        sprite.setSize(1, 1);
+
     }
+
 
     public boolean isDead() {
         return framesUntilRespawn > 0;
@@ -31,6 +37,10 @@ public class PlayerShip extends Entity {
 
     @Override
     public void update(float delta) {
+        float playerWidth = sprite.getWidth();
+        float playerHeight = sprite.getHeight();
+        float worldWidth = GameRoot.Viewport.getWorldWidth();
+        float worldHeight = GameRoot.Viewport.getWorldHeight();
 
         if (isDead()) {
             framesUntilRespawn--;
@@ -38,36 +48,38 @@ public class PlayerShip extends Entity {
         }
 
         // 瞄準和射擊邏輯
-        Vector2 aim = InputHandler.getAimDirection();
-        if (aim.len2() > 0 && cooldownRemaining <= 0) {
-            cooldownRemaining = cooldownFrames;
-            float aimAngle = aim.angleRad();
-            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
-
-            float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
-            Vector2 vel = new Vector2(bulletSpeed, 0).rotateRad(aimAngle + randomSpread);
-
-            Vector2 offset = new Vector2(35, -8).rotateRad(aimAngle);
-            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
-
-            offset.set(35, 8).rotateRad(aimAngle);
-            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
-        }
+//        Vector2 aim = InputHandler.getAimDirection();
+//        if (aim.len2() > 0 && cooldownRemaining <= 0) {
+//            cooldownRemaining = cooldownFrames;
+//            float aimAngle = aim.angleRad();
+//            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
+//
+//            float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
+//            Vector2 vel = new Vector2(bulletSpeed, 0).rotateRad(aimAngle + randomSpread);
+//
+//            Vector2 offset = new Vector2(35, -8).rotateRad(aimAngle);
+//            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
+//
+//            offset.set(35, 8).rotateRad(aimAngle);
+//            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
+//        }
 
         if (cooldownRemaining > 0) cooldownRemaining--;
 
         // 移動邏輯
         velocity.set(InputHandler.getMovementDirection()).scl(speed);
-        position.add(velocity);
+
+        sprite.translate((velocity.x) * delta, (velocity.y) * delta);
+
 
         // 限制玩家在螢幕邊界內
-        position.x = MathUtils.clamp(position.x, 0, GameRoot.ScreenWidth);
-        position.y = MathUtils.clamp(position.y, 0, GameRoot.ScreenHeight);
+        sprite.setX(MathUtils.clamp(sprite.getX(), 0, worldWidth - playerWidth));
+        sprite.setY(MathUtils.clamp(sprite.getY(), 0, worldHeight - playerHeight));
 
         // 根據移動方向更新朝向
-        if (velocity.len2() > 0) {
-            orientation = velocity.angleRad();
-        }
+//        if (velocity.len2() > 0) {
+//            orientation = velocity.angleRad();
+//        }
     }
 
     @Override
