@@ -51,24 +51,6 @@ public class PlayerShip extends Entity {
             return;
         }
 
-        // 瞄準和射擊邏輯
-//        Vector2 aim = InputHandler.getAimDirection();
-//        if (aim.len2() > 0 && cooldownRemaining <= 0) {
-//            cooldownRemaining = cooldownFrames;
-//            float aimAngle = aim.angleRad();
-//            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
-//
-//            float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
-//            Vector2 vel = new Vector2(bulletSpeed, 0).rotateRad(aimAngle + randomSpread);
-//
-//            Vector2 offset = new Vector2(35, -8).rotateRad(aimAngle);
-//            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
-//
-//            offset.set(35, 8).rotateRad(aimAngle);
-//            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
-//        }
-
-
 
         // 移動邏輯
         velocity.set(InputHandler.getMovementDirection()).scl(speed);
@@ -82,11 +64,28 @@ public class PlayerShip extends Entity {
         if (velocity.len2() > 0) {
             orientation = (float) Math.toDegrees(velocity.angleRad());
         }
-        System.out.println(orientation);
 
         sprite.setRotation(orientation);
 
+        // 瞄準和射擊邏輯
+        Vector2 aim = InputHandler.getAimDirection();
+//        System.out.println(aim);
+        if (aim.len2() > 0 && cooldownRemaining <= 0) {
+            cooldownRemaining = cooldownFrames;
+            float aimAngle = (float) Math.toDegrees(aim.angleRad());
+//            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
 
+            float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
+            Vector2 vel = new Vector2(bulletSpeed, 0).rotateRad(aimAngle + randomSpread);
+//            System.out.println(vel + "shipsdsdsdsd");
+            Vector2 pos = new Vector2(sprite.getX(), sprite.getY());
+            EntityManager.add(new Bullet(pos, vel));
+
+
+        }
+
+        if (cooldownRemaining > 0)
+            cooldownRemaining--;
 
 
     }

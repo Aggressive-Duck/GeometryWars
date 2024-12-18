@@ -50,6 +50,7 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         EntityManager.update(delta);
+        InputHandler.update();
         // Update game logic
 
         GameRoot.Viewport.apply();
