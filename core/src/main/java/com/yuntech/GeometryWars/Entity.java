@@ -12,7 +12,7 @@ public abstract class Entity {
     public float orientation;
     public float radius = 20;
     public boolean isExpired;
-    public Sprite sprite;
+//    public Sprite sprite;
 
 
     public Vector2 getSize() {
@@ -23,7 +23,7 @@ public abstract class Entity {
 
     public void draw(SpriteBatch spriteBatch) {
 //        spriteBatch.draw(image, position.x, position.y, getSize().x / 2, getSize().y / 2, getSize().x, getSize().y, 1, 1, orientation, 0, 0, image.getWidth(), image.getHeight(), false, false);
-        sprite.draw(spriteBatch);
+
     }
 }
 

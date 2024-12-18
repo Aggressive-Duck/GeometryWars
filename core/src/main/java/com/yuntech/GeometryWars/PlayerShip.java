@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Quaternion;
 
+import static java.lang.Math.toDegrees;
+
 public class PlayerShip extends Entity {
     private static PlayerShip instance;
     public static PlayerShip getInstance() {
@@ -16,17 +18,19 @@ public class PlayerShip extends Entity {
     private static final int cooldownFrames = 6;
     private int cooldownRemaining = 0;
     private int framesUntilRespawn = 0;
-    private static final float speed = 4f;
+    private static final float speed = 8f;
     private static final float bulletSpeed = 11f;
-
+    public Sprite sprite;
 
     private PlayerShip() {
         this.image = Art.player;
 //        this.position = new Vector2(GameRoot.Viewport.getWorldWidth() / 2, GameRoot.Viewport.getWorldHeight() / 2);
         this.velocity = new Vector2(); // Initialize velocity
         this.radius = 10;
-        this.sprite = new Sprite(image);
-        sprite.setSize(1, 1);
+        sprite = new Sprite(this.image);
+        sprite.setSize(1,1);
+        sprite.setOriginCenter();
+
 
     }
 
@@ -64,27 +68,36 @@ public class PlayerShip extends Entity {
 //            EntityManager.add(new Bullet(position.cpy().add(offset), vel));
 //        }
 
-        if (cooldownRemaining > 0) cooldownRemaining--;
+
 
         // 移動邏輯
         velocity.set(InputHandler.getMovementDirection()).scl(speed);
 
         sprite.translate((velocity.x) * delta, (velocity.y) * delta);
 
-
         // 限制玩家在螢幕邊界內
         sprite.setX(MathUtils.clamp(sprite.getX(), 0, worldWidth - playerWidth));
         sprite.setY(MathUtils.clamp(sprite.getY(), 0, worldHeight - playerHeight));
 
-        // 根據移動方向更新朝向
-//        if (velocity.len2() > 0) {
-//            orientation = velocity.angleRad();
-//        }
+        if (velocity.len2() > 0) {
+            orientation = (float) Math.toDegrees(velocity.angleRad());
+        }
+        System.out.println(orientation);
+
+        sprite.setRotation(orientation);
+
+
+
+
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if (!isDead()) super.draw(spriteBatch);
+        if (!isDead()) {
+
+            sprite.draw(spriteBatch);
+        }
+
     }
 
     public void kill() {
