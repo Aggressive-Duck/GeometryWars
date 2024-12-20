@@ -1,5 +1,6 @@
 package com.yuntech.GeometryWars;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,11 +8,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
     protected Texture image;
-    protected com.badlogic.gdx.graphics.Color color = com.badlogic.gdx.graphics.Color.WHITE;
-    public Vector2 position, velocity;
-    public float orientation;
-    public float radius = 20;
-    public boolean isExpired;
+    protected Color color = Color.WHITE;
+    public Vector2 Position, Velocity;
+    public float Orientation;
+    public float Radius = 20;
+    public boolean IsExpired;
     public Sprite sprite;
 
 

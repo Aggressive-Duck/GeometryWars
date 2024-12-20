@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.*;
 
-import static java.lang.Math.toDegrees;
-
 public class PlayerShip extends Entity {
     private static PlayerShip instance;
     public static PlayerShip getInstance() {
@@ -23,8 +21,8 @@ public class PlayerShip extends Entity {
     private PlayerShip() {
         this.image = Art.player;
 //        this.position = new Vector2(GameRoot.Viewport.getWorldWidth() / 2, GameRoot.Viewport.getWorldHeight() / 2);
-        this.velocity = new Vector2(); // Initialize velocity
-        this.radius = 10;
+        this.Velocity = new Vector2(); // Initialize velocity
+        this.Radius = 10;
         sprite = new Sprite(this.image);
         sprite.setSize(1,1);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
@@ -51,19 +49,19 @@ public class PlayerShip extends Entity {
 
 
         // 移動邏輯
-        velocity.set(InputHandler.getMovementDirection()).scl(speed);
+        Velocity.set(InputHandler.getMovementDirection()).scl(speed);
 
-        sprite.translate((velocity.x) * delta, (velocity.y) * delta);
+        sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
 
         // 限制玩家在螢幕邊界內
         sprite.setX(MathUtils.clamp(sprite.getX(), 0, worldWidth - playerWidth));
         sprite.setY(MathUtils.clamp(sprite.getY(), 0, worldHeight - playerHeight));
 
-        if (velocity.len2() > 0) {
-            orientation = (float) Math.toDegrees(velocity.angleRad());
+        if (Velocity.len2() > 0) {
+            Orientation = (float) Math.toDegrees(Velocity.angleRad());
         }
 
-        sprite.setRotation(orientation);
+        sprite.setRotation(Orientation);
 
         // 瞄準和射擊邏輯
         Vector2 aim = InputHandler.getMouseAimDirection();

@@ -1,8 +1,6 @@
 package com.yuntech.GeometryWars;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bullet extends Entity {
@@ -10,10 +8,10 @@ public class Bullet extends Entity {
 
     public Bullet(Vector2 position,Vector2 velocity) {
         this.image = Art.bullet;
-        this.position = position;
-        this.velocity = velocity;
-        this.orientation = velocity.angleDeg();
-        this.radius = 8;
+        this.Position = position;
+        this.Velocity = velocity;
+        this.Orientation = velocity.angleDeg();
+        this.Radius = 8;
         this.sprite = new Sprite(this.image);
         sprite.setSize(0.5f,0.25f);
         sprite.setOrigin(PlayerShip.getInstance().sprite.getWidth() / 2, PlayerShip.getInstance().sprite.getHeight() / 2);
@@ -32,18 +30,18 @@ public class Bullet extends Entity {
 //        System.out.println(velocity);
 
 
-        if (velocity.len2() > 0) {
-            orientation = velocity.angleDeg();
+        if (Velocity.len2() > 0) {
+            Orientation = Velocity.angleDeg();
 //            System.out.println(orientation);
 
         }
-        sprite.setRotation(orientation);
-        sprite.translate((velocity.x) * delta, (velocity.y) * delta);
+        sprite.setRotation(Orientation);
+        sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
 
 
         // delete bullets that go off-screen
         if (sprite.getX() < -bulletWidth &&  sprite.getY() < -bulletHeight) {
-            isExpired = true;
+            IsExpired = true;
         }
     }
 }

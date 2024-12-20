@@ -49,7 +49,7 @@ public class EntityManager {
         Iterator<Entity> iterEntity = entities.iterator();
         while (iterEntity.hasNext()) {
             Entity entity = iterEntity.next();
-            if (entity.isExpired) {
+            if (entity.IsExpired) {
                 iterEntity.remove();
             }
         }
@@ -57,7 +57,7 @@ public class EntityManager {
         Iterator<Bullet> iterBullet = bullets.iterator();
         while (iterBullet.hasNext()) {
             Bullet bullet = iterBullet.next();
-            if (bullet.isExpired) {
+            if (bullet.IsExpired) {
                 iterBullet.remove();
             }
         }
