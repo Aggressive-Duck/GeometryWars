@@ -59,6 +59,7 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         EntityManager.draw(spriteBatch);
         spriteBatch.draw(Art.pointer, Gdx.input.getX(), Gdx.input.getY(), 1, 1);
+        System.out.println(Gdx.input.getX() + " " + Gdx.input.getY());
         spriteBatch.end();
     }
 

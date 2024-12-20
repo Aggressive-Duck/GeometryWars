@@ -24,6 +24,6 @@ public abstract class Entity {
     public void draw(SpriteBatch spriteBatch) {
 //        spriteBatch.draw(image, position.x, position.y, getSize().x / 2, getSize().y / 2, getSize().x, getSize().y, 1, 1, orientation, 0, 0, image.getWidth(), image.getHeight(), false, false);
         sprite.draw(spriteBatch);
+
     }
 }
-

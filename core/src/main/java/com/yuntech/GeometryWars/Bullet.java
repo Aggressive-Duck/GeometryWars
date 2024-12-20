@@ -12,12 +12,15 @@ public class Bullet extends Entity {
         this.image = Art.bullet;
         this.position = position;
         this.velocity = velocity;
-        this.orientation = (float) Math.toDegrees(velocity.angleRad());
+        this.orientation = velocity.angleDeg();
         this.radius = 8;
         this.sprite = new Sprite(this.image);
         sprite.setSize(1,1);
-        sprite.setOriginCenter();
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setPosition(position.x, position.y);
+
+
+
     }
 
     @Override
@@ -30,7 +33,9 @@ public class Bullet extends Entity {
 
 
         if (velocity.len2() > 0) {
-            orientation = (float) Math.toDegrees(velocity.angleRad());
+            orientation = velocity.angleDeg();
+//            System.out.println(orientation);
+
         }
 
         sprite.setRotation(orientation);

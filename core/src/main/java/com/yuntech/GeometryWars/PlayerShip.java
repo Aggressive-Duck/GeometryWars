@@ -2,9 +2,7 @@ package com.yuntech.GeometryWars;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.*;
 
 import static java.lang.Math.toDegrees;
 
@@ -15,7 +13,7 @@ public class PlayerShip extends Entity {
         return instance;
     }
 
-    private static final int cooldownFrames = 6;
+    private static final int cooldownFrames = 12;
     private int cooldownRemaining = 0;
     private int framesUntilRespawn = 0;
     private static final float speed = 8f;
@@ -68,18 +66,33 @@ public class PlayerShip extends Entity {
         sprite.setRotation(orientation);
 
         // 瞄準和射擊邏輯
-        Vector2 aim = InputHandler.getAimDirection();
+        Vector2 aim = InputHandler.getMouseAimDirection();
 //        System.out.println(aim);
         if (aim.len2() > 0 && cooldownRemaining <= 0) {
             cooldownRemaining = cooldownFrames;
-            float aimAngle = (float) Math.toDegrees(aim.angleRad());
-//            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
+            float aimAngle = aim.angleDeg();
+            Quaternion aimQuat = new Quaternion().setEulerAnglesRad(0, 0, aimAngle);
+
+
+            Matrix3 matrix = new Matrix3();
+
+            // Set up the matrix (example values)
+//            System.out.println(aimAngle);
+            matrix.setToRotation(aimAngle); // Rotate by 45 degrees
+
 
             float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
-            Vector2 vel = new Vector2(bulletSpeed, 0).rotateRad(aimAngle + randomSpread);
+            Vector2 vel = new Vector2(aim).nor().scl(bulletSpeed).rotateRad(randomSpread);
+//            System.out.println(aimAngle);
+            //Vector2 vel = MathUtil.fromPolar(aimAngle + randomSpread, bulletSpeed);
 //            System.out.println(vel + "shipsdsdsdsd");
+//            Vector2 offset = new Vector2(-playerWidth/5f, 1f);
+            //do your transformations
+            Vector2 offset = new Vector2(-playerWidth/5f, 1f);
+            offset.mul(matrix);
             Vector2 pos = new Vector2(sprite.getX(), sprite.getY());
-            EntityManager.add(new Bullet(pos, vel));
+
+            EntityManager.add(new Bullet(pos , vel));
 
 
         }

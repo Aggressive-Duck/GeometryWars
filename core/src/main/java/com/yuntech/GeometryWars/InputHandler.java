@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class InputHandler extends InputAdapter {
     public static Vector2 mousePosition = new Vector2();
@@ -11,7 +12,8 @@ public class InputHandler extends InputAdapter {
 
 
     public static void update() {
-        mousePosition.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+        mousePosition.set(Gdx.input.getX(), Gdx.input.getY());
+        GameRoot.Viewport.unproject(mousePosition);
         System.out.println(mousePosition);
         // If the player pressed one of the arrow keys or is using a gamepad to aim, we want to disable mouse aiming. Otherwise,
         // if the player moves the mouse, enable mouse aiming.
@@ -55,11 +57,17 @@ public class InputHandler extends InputAdapter {
         else return direction.nor();
     }
 
-    private static Vector2 getMouseAimDirection() {
+    public static Vector2 getMouseAimDirection() {
 //        Vector2 direction = new Vector2(mousePosition).sub(PlayerShip.getInstance().position);
-        Vector2 direction = new Vector2(mousePosition).sub(PlayerShip.getInstance().sprite.getX(), PlayerShip.getInstance().sprite.getY());
+        Vector2 direction = new Vector2(mousePosition.sub(PlayerShip.getInstance().sprite.getX(), PlayerShip.getInstance().sprite.getY()));
+//        Vector2 direction = new Vector2(mousePosition);
+
+
+
         if (direction.len2() == 0) return new Vector2(0, 0);
         else return direction.nor();
     }
+
+
 }
 

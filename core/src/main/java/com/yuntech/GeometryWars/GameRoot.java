@@ -14,8 +14,8 @@ public class GameRoot extends Game {
     public static GameRoot Instance;
     public static Viewport Viewport;
     public static OrthographicCamera Camera;
-    public static float ScreenWidth = 16;
-    public static float ScreenHeight = 12;
+    public static float ScreenWidth = 16f;
+    public static float ScreenHeight = 12f;
 
 
     private SpriteBatch spriteBatch;
@@ -27,7 +27,7 @@ public class GameRoot extends Game {
         Camera = new OrthographicCamera();
         Viewport = new FitViewport(ScreenWidth, ScreenHeight, Camera);
         spriteBatch = new SpriteBatch();
-
+//        spriteBatch.setProjectionMatrix(Camera.combined);
         // Load assets
         Art.load();
 //        SoundManager.load();
