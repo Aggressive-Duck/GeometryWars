@@ -14,8 +14,8 @@ public class GameRoot extends Game {
     public static GameRoot Instance;
     public static Viewport Viewport;
     public static OrthographicCamera Camera;
-    public static float ScreenWidth = 16f;
-    public static float ScreenHeight = 12f;
+    public static float ScreenWidth = 24f;
+    public static float ScreenHeight = 18f;
 
 
     private SpriteBatch spriteBatch;

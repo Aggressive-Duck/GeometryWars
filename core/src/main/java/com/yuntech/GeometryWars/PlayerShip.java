@@ -27,7 +27,7 @@ public class PlayerShip extends Entity {
         this.radius = 10;
         sprite = new Sprite(this.image);
         sprite.setSize(1,1);
-        sprite.setOriginCenter();
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 
 
     }
@@ -88,12 +88,12 @@ public class PlayerShip extends Entity {
 //            System.out.println(vel + "shipsdsdsdsd");
 //            Vector2 offset = new Vector2(-playerWidth/5f, 1f);
             //do your transformations
-            Vector2 offset = new Vector2(playerWidth, 1f/3f);
+            Vector2 offset = new Vector2(playerWidth, 0.6f);
             offset.mul(matrix);
             Vector2 pos = new Vector2(sprite.getX(), sprite.getY());
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 
-            offset = new Vector2( playerWidth, -1f/3f);
+            offset = new Vector2( playerWidth, 0.1f);
             offset.mul(matrix);
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 

@@ -15,8 +15,8 @@ public class Bullet extends Entity {
         this.orientation = velocity.angleDeg();
         this.radius = 8;
         this.sprite = new Sprite(this.image);
-        sprite.setSize(1,1/2f);
-        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        sprite.setSize(0.5f,0.25f);
+        sprite.setOrigin(PlayerShip.getInstance().sprite.getWidth() / 2, PlayerShip.getInstance().sprite.getHeight() / 2);
         sprite.setPosition(position.x, position.y);
         sprite.setRotation(velocity.angleDeg());
 
