@@ -15,10 +15,10 @@ public class Bullet extends Entity {
         this.orientation = velocity.angleDeg();
         this.radius = 8;
         this.sprite = new Sprite(this.image);
-        sprite.setSize(1,1);
+        sprite.setSize(1,1/2f);
         sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
         sprite.setPosition(position.x, position.y);
-
+        sprite.setRotation(velocity.angleDeg());
 
 
     }
@@ -28,7 +28,7 @@ public class Bullet extends Entity {
         float bulletWidth = sprite.getWidth();
         float bulletHeight = sprite.getHeight();
 
-        sprite.translate((velocity.x) * delta, (velocity.y) * delta);
+
 //        System.out.println(velocity);
 
 
@@ -37,8 +37,9 @@ public class Bullet extends Entity {
 //            System.out.println(orientation);
 
         }
-
         sprite.setRotation(orientation);
+        sprite.translate((velocity.x) * delta, (velocity.y) * delta);
+
 
         // delete bullets that go off-screen
         if (sprite.getX() < -bulletWidth &&  sprite.getY() < -bulletHeight) {
