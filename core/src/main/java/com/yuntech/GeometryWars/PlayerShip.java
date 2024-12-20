@@ -13,11 +13,11 @@ public class PlayerShip extends Entity {
         return instance;
     }
 
-    private static final int cooldownFrames = 12;
+    private static final int cooldownFrames = 18;
     private int cooldownRemaining = 0;
     private int framesUntilRespawn = 0;
     private static final float speed = 8f;
-    private static final float bulletSpeed = 11f;
+    private static final float bulletSpeed = 22f;
     public Sprite sprite;
 
     private PlayerShip() {
@@ -88,12 +88,12 @@ public class PlayerShip extends Entity {
 //            System.out.println(vel + "shipsdsdsdsd");
 //            Vector2 offset = new Vector2(-playerWidth/5f, 1f);
             //do your transformations
-            Vector2 offset = new Vector2(playerWidth, 1f/2.5f);
+            Vector2 offset = new Vector2(playerWidth, 1f/3f);
             offset.mul(matrix);
             Vector2 pos = new Vector2(sprite.getX(), sprite.getY());
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 
-            offset = new Vector2( playerWidth, -1f/2.5f);
+            offset = new Vector2( playerWidth, -1f/3f);
             offset.mul(matrix);
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 
