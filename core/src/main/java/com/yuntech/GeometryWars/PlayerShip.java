@@ -11,21 +11,21 @@ public class PlayerShip extends Entity {
         return instance;
     }
 
-    private static final int cooldownFrames = 18;
+    private static final int cooldownFrames = 0;
     private int cooldownRemaining = 0;
     private int framesUntilRespawn = 0;
     private static final float speed = 8f;
-    private static final float bulletSpeed = 22f;
-    public Sprite sprite;
+    private static final float bulletSpeed =22f;
 
     private PlayerShip() {
         this.image = Art.player;
 //        this.position = new Vector2(GameRoot.Viewport.getWorldWidth() / 2, GameRoot.Viewport.getWorldHeight() / 2);
         this.Velocity = new Vector2(); // Initialize velocity
         this.Radius = 10;
-        sprite = new Sprite(this.image);
-        sprite.setSize(1,1);
-        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        Sprite = new Sprite(this.image);
+        Sprite.setSize(1,1);
+        Sprite.setOrigin(Sprite.getWidth() / 2, Sprite.getHeight() / 2);
+
 
 
     }
@@ -37,8 +37,8 @@ public class PlayerShip extends Entity {
 
     @Override
     public void update(float delta) {
-        float playerWidth = sprite.getWidth();
-        float playerHeight = sprite.getHeight();
+        float playerWidth = Sprite.getWidth();
+        float playerHeight = Sprite.getHeight();
         float worldWidth = GameRoot.Viewport.getWorldWidth();
         float worldHeight = GameRoot.Viewport.getWorldHeight();
 
@@ -51,17 +51,17 @@ public class PlayerShip extends Entity {
         // 移動邏輯
         Velocity.set(InputHandler.getMovementDirection()).scl(speed);
 
-        sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
+        Sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
 
         // 限制玩家在螢幕邊界內
-        sprite.setX(MathUtils.clamp(sprite.getX(), 0, worldWidth - playerWidth));
-        sprite.setY(MathUtils.clamp(sprite.getY(), 0, worldHeight - playerHeight));
+        Sprite.setX(MathUtils.clamp(Sprite.getX(), 0, worldWidth - playerWidth));
+        Sprite.setY(MathUtils.clamp(Sprite.getY(), 0, worldHeight - playerHeight));
 
         if (Velocity.len2() > 0) {
             Orientation = (float) Math.toDegrees(Velocity.angleRad());
         }
 
-        sprite.setRotation(Orientation);
+        Sprite.setRotation(Orientation);
 
         // 瞄準和射擊邏輯
         Vector2 aim = InputHandler.getMouseAimDirection();
@@ -88,7 +88,7 @@ public class PlayerShip extends Entity {
             //do your transformations
             Vector2 offset = new Vector2(playerWidth, 0.6f);
             offset.mul(matrix);
-            Vector2 pos = new Vector2(sprite.getX(), sprite.getY());
+            Vector2 pos = new Vector2(Sprite.getX(), Sprite.getY());
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 
             offset = new Vector2( playerWidth, 0.1f);
@@ -96,7 +96,7 @@ public class PlayerShip extends Entity {
             EntityManager.add(new Bullet(pos.cpy().add(offset), vel));
 
         }
-
+        Position = new Vector2(Sprite.getX(), Sprite.getY());
         if (cooldownRemaining > 0)
             cooldownRemaining--;
 
@@ -107,7 +107,7 @@ public class PlayerShip extends Entity {
     public void draw(SpriteBatch spriteBatch) {
         if (!isDead()) {
 
-            sprite.draw(spriteBatch);
+            Sprite.draw(spriteBatch);
         }
 
     }

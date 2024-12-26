@@ -12,19 +12,19 @@ public class Bullet extends Entity {
         this.Velocity = velocity;
         this.Orientation = velocity.angleDeg();
         this.Radius = 8;
-        this.sprite = new Sprite(this.image);
-        sprite.setSize(0.5f,0.25f);
-        sprite.setOrigin(PlayerShip.getInstance().sprite.getWidth() / 2, PlayerShip.getInstance().sprite.getHeight() / 2);
-        sprite.setPosition(position.x, position.y);
-        sprite.setRotation(velocity.angleDeg());
+        this.Sprite = new Sprite(this.image);
+        Sprite.setSize(0.5f,0.25f);
+        Sprite.setOrigin(PlayerShip.getInstance().Sprite.getWidth() / 2, PlayerShip.getInstance().Sprite.getHeight() / 2);
+        Sprite.setPosition(position.x, position.y);
+        Sprite.setRotation(velocity.angleDeg());
 
 
     }
 
     @Override
     public void update(float delta) {
-        float bulletWidth = sprite.getWidth();
-        float bulletHeight = sprite.getHeight();
+        float bulletWidth = Sprite.getWidth();
+        float bulletHeight = Sprite.getHeight();
 
 
 //        System.out.println(velocity);
@@ -35,12 +35,12 @@ public class Bullet extends Entity {
 //            System.out.println(orientation);
 
         }
-        sprite.setRotation(Orientation);
-        sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
+        Sprite.setRotation(Orientation);
+        Sprite.translate((Velocity.x) * delta, (Velocity.y) * delta);
 
 
         // delete bullets that go off-screen
-        if (sprite.getX() < -bulletWidth &&  sprite.getY() < -bulletHeight) {
+        if (Sprite.getX() < -bulletWidth &&  Sprite.getY() < -bulletHeight) {
             IsExpired = true;
         }
     }
