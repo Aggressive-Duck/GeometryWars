@@ -7,7 +7,7 @@ public class Bullet extends Entity {
 
 
     public Bullet(Vector2 position,Vector2 velocity) {
-        this.image = Art.bullet;
+        this.image = Art.Bullet;
         this.Position = position;
         this.Velocity = velocity;
         this.Orientation = velocity.angleDeg();

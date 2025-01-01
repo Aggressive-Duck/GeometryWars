@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 
 public class GameScreen implements Screen {
@@ -58,7 +57,7 @@ public class GameScreen implements Screen {
         // Draw entities
         spriteBatch.begin();
         EntityManager.draw(spriteBatch);
-        spriteBatch.draw(Art.pointer, Gdx.input.getX(), Gdx.input.getY(), 1, 1);
+        spriteBatch.draw(Art.Pointer, Gdx.input.getX(), Gdx.input.getY(), 1, 1);
         System.out.println(Gdx.input.getX() + " " + Gdx.input.getY());
         spriteBatch.end();
     }

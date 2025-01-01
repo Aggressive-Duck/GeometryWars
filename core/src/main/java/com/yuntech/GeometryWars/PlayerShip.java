@@ -18,7 +18,7 @@ public class PlayerShip extends Entity {
     private static final float bulletSpeed =22f;
 
     private PlayerShip() {
-        this.image = Art.player;
+        this.image = Art.Player;
 //        this.position = new Vector2(GameRoot.Viewport.getWorldWidth() / 2, GameRoot.Viewport.getWorldHeight() / 2);
         this.Velocity = new Vector2(); // Initialize velocity
         this.Radius = 10;
@@ -80,7 +80,7 @@ public class PlayerShip extends Entity {
 
 
             float randomSpread = MathUtils.random(-0.04f, 0.04f) + MathUtils.random(-0.04f, 0.04f);
-            Vector2 vel = new Vector2(aim).nor().scl(bulletSpeed).rotateRad(randomSpread);
+            Vector2 vel = new Vector2(aim).scl(bulletSpeed).rotateRad(randomSpread);
 //            System.out.println(aimAngle);
             //Vector2 vel = MathUtil.fromPolar(aimAngle + randomSpread, bulletSpeed);
 //            System.out.println(vel + "shipsdsdsdsd");

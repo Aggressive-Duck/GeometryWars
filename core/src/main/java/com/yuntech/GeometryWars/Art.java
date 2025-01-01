@@ -4,19 +4,19 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Art {
-    public static Texture player;
-    public static Texture seeker;
-    public static Texture wanderer;
-    public static Texture bullet;
-    public static Texture pointer;
+    public static Texture Player;
+    public static Texture Seeker;
+    public static Texture Wanderer;
+    public static Texture Bullet;
+    public static Texture Pointer;
 
 
     public static void load() {
-        player = new Texture(Gdx.files.internal("Art/Player.png"));
-        seeker = new Texture(Gdx.files.internal("Art/Seeker.png"));
-        wanderer = new Texture(Gdx.files.internal("Art/Wanderer.png"));
-        bullet = new Texture(Gdx.files.internal("Art/Bullet.png"));
-        pointer = new Texture(Gdx.files.internal("Art/Pointer.png"));
+        Player = new Texture(Gdx.files.internal("Art/Player.png"));
+        Seeker = new Texture(Gdx.files.internal("Art/Seeker.png"));
+        Wanderer = new Texture(Gdx.files.internal("Art/Wanderer.png"));
+        Bullet = new Texture(Gdx.files.internal("Art/Bullet.png"));
+        Pointer = new Texture(Gdx.files.internal("Art/Pointer.png"));
 
     }
 
